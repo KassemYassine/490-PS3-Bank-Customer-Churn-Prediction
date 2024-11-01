@@ -5,12 +5,11 @@ from sklearn.preprocessing import StandardScaler
 def process_and_split_data(file_path):
     # Load the dataset from a CSV file
     df = pd.read_csv(file_path)
-    
     # Select the first 500 entries
     df = df.head(500)
     
     # Drop the 'Customer ID' and 'Surname' columns as they are not needed
-    df = df.drop(['Customer ID', 'Surname'], axis=1)
+    df = df.drop(['CustomerId','Surname'], axis=1)
     
     # Convert 'Geography' to numerical values using get_dummies
     df = pd.get_dummies(df, columns=['Geography'])
