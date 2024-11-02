@@ -38,6 +38,8 @@ class Neural_Network:
     def train(self, x, y, epochs=100):
         for epoch in range(epochs):
             output = self.forward(x)
+            print(output.shape)
+            print(y.shape)
             self.backward(x, y, output)
 
     def predict(self, x):
