@@ -27,20 +27,23 @@ class Neural_Network:
     
     def backward(self, X, y, y_hat):
         # Calculate error in output
-        delta3 = np.multiply(-(y - y_hat), self.sigmoid_derivative(self.z3))
-        dJdW2 = np.dot(self.a2.T, delta3)  # Derivative of loss w.r.t. W2
+        output_error = y - y_hat
+        output_delta = output_error * self.sigmoid_derivative(self.z3)
         
-        delta2 = np.dot(delta3, self.W2.T) * self.sigmoid_derivative(self.z2)
-        dJdW1 = np.dot(X.T, delta2)  # Derivative of loss w.r.t. W1
+        # Calculate errors for hidden layer
+        hidden_error = np.dot(output_delta, self.W2.T)
+        hidden_delta = hidden_error * self.sigmoid_derivative(self.z2)
         
-        # Update the weights with gradient descent step
-        self.W1 -= self.learning_rate * dJdW1
-        self.W2 -= self.learning_rate * dJdW2
+        # Update weights from hidden to output layer
+        self.W2 += np.dot(self.a2.T, output_delta) * self.learning_rate
         
-        # Update biases
-        self.b1 -= self.learning_rate * np.sum(delta2, axis=0)
-        self.b2 -= self.learning_rate * np.sum(delta3, axis=0)
-    
+        # Update weights from input to hidden layer
+        self.W1 += np.dot(X.T, hidden_delta) * self.learning_rate
+        
+        # Update biases in the hidden and output layers
+        self.b2 += np.sum(output_delta, axis=0) * self.learning_rate
+        self.b1 += np.sum(hidden_delta, axis=0) * self.learning_rate
+
     def train(self, X, y, epochs=1000, learning_rate=0.01):
         self.learning_rate = learning_rate
         for epoch in range(epochs):
