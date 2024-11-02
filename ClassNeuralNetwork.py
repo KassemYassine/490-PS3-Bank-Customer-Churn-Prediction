@@ -5,9 +5,9 @@ class Neural_Network:
     #initialize weights and biases randomly
     def __init__(self, input_size, hidden_size, output_size, learning_rate=0.01):
         self.weights_input_hidden = np.random.rand(input_size, hidden_size) - 0.5
-        self.weights_hidden_output = np.random.rand(hidden_size, output_size) - 0.5
+        self.weights_hidden_output = np.random.rand(hidden_size,) - 0.5
         self.bias_hidden = np.random.rand(hidden_size) - 0.5
-        self.bias_output = np.random.rand(output_size) - 0.5
+        self.bias_output = np.random.rand() - 0.5
         self.learning_rate = learning_rate
 
     def sigmoid(self, x):
