@@ -24,10 +24,10 @@ class Neural_Network:
         return self.final_output
 
     def backward(self, x, y, output):
+        print(y.shape)
+        print(output.shape)
         output_error = y - output
-        print(output_error.shape)
         output_delta = output_error * self.sigmoid_derivative(output)
-        print(output_delta.shape)
         hidden_error = output_delta.dot(self.weights_hidden_output.T)
         hidden_delta = hidden_error * self.sigmoid_derivative(self.hidden_output)
 
