@@ -58,4 +58,4 @@ class Neural_Network:
         return 1 / (1 + np.exp(-z))
     
     def sigmoid_derivative(self, z):
-        return self.sigmoid(z) * (1 - self.sigmoid(z))
+        return z * (1 - z)
