@@ -8,7 +8,7 @@ def process_and_split_data(file_path):
     # Select the first 500 entries
     df = df.head(500)
     
-    # Drop the 'Customer ID' and 'Surname' columns as they are not needed
+    # Drop the 'CustomerId' and 'Surname' columns as they are not needed
     df = df.drop(['CustomerId','Surname'], axis=1)
     
     # Convert 'Geography' to numerical values using get_dummies
@@ -28,5 +28,5 @@ def process_and_split_data(file_path):
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+    print(y_train.shape)
     return X_train_scaled, X_test_scaled, y_train, y_test
