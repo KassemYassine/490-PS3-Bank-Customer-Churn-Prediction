@@ -28,5 +28,4 @@ def process_and_split_data(file_path):
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    print(y_train.shape)
     return X_train_scaled, X_test_scaled, y_train, y_test
