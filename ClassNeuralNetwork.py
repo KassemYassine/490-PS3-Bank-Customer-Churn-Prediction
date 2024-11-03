@@ -26,21 +26,16 @@ class Neural_Network:
         return y_hat
     
     def backward(self, X, y, y_hat):
-        # Calculate error in output
         output_error = y - y_hat
         output_delta = output_error * self.sigmoid_derivative(self.z3)
         
-        # Calculate errors for hidden layer
         hidden_error = np.dot(output_delta, self.W2.T)
         hidden_delta = hidden_error * self.sigmoid_derivative(self.z2)
         
-        # Update weights from hidden to output layer
         self.W2 += np.dot(self.a2.T, output_delta) * self.learning_rate
         
-        # Update weights from input to hidden layer
         self.W1 += np.dot(X.T, hidden_delta) * self.learning_rate
         
-        # Update biases in the hidden and output layers
         self.b2 += np.sum(output_delta, axis=0) * self.learning_rate
         self.b1 += np.sum(hidden_delta, axis=0) * self.learning_rate
 
