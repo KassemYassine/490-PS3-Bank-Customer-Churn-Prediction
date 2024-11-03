@@ -48,11 +48,11 @@ class Neural_Network:
         self.learning_rate = learning_rate
         for epoch in range(epochs):
             y_hat = self.forward(X)
+            print(y_hat.shape)
             y_hat = y_hat.squeeze()
+            print(y_hat.shape)
             self.backward(X, y, y_hat)
-            if epoch % 100 == 0:
-                loss = np.mean((y - y_hat) ** 2)
-                print(f"Epoch {epoch}, Loss: {loss:.4f}")
+
     
     def sigmoid(self, z):
         return 1 / (1 + np.exp(-z))
